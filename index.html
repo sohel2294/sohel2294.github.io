@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sohel H. Shaikh — Principal Lead Consultant</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a0f1e;
+    --navy2: #0f1729;
+    --blue: #1a3a6e;
+    --accent: #4b8ef0;
+    --accent2: #7eb8f7;
+    --gold: #e8c97a;
+    --white: #f0f4ff;
+    --muted: #8a9bc0;
+    --card: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: screen;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--accent2);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.12s ease;
+    opacity: 0.5;
+  }
+
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+  }
+
+  /* Grid background */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(74,142,240,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,142,240,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,15,30,0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent2); }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 2; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    gap: 4rem;
+    overflow: hidden;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+  .hero-name .line2 {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--accent2);
+  }
+
+  .hero-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin: 1.5rem 0 1.8rem;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 480px;
+    font-weight: 300;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--navy);
+    padding: 0.75rem 1.8rem;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: all 0.25s;
+    border: none;
+    cursor: none;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+  .btn-secondary {
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 0.75rem 1.8rem;
+    border-radius: 4px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: all 0.25s;
+    cursor: none;
+  }
+  .btn-secondary:hover { border-color: var(--accent2); color: var(--accent2); }
+
+  /* Hero right — floating stat cards */
+  .hero-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    position: relative;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, border-color 0.3s;
+    animation: floatCard 6s ease-in-out infinite;
+  }
+  .stat-card:nth-child(2) { animation-delay: -2s; }
+  .stat-card:nth-child(3) { animation-delay: -4s; }
+  .stat-card:nth-child(4) { animation-delay: -1s; }
+  .stat-card:hover { transform: translateY(-6px) !important; border-color: var(--accent); }
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.4rem;
+  }
+  .stat-card.wide { grid-column: span 2; }
+
+  /* ABOUT */
+  #about {
+    padding: 8rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    align-items: start;
+    border-top: 1px solid var(--border);
+  }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--accent);
+    display: inline-block;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    line-height: 1.1;
+  }
+  .about-text {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Contact chips */
+  .contact-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+  .chip {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .chip.accent { border-color: var(--accent); color: var(--accent2); }
+
+  /* EXPERIENCE */
+  #experience {
+    padding: 8rem 4rem;
+    border-top: 1px solid var(--border);
+  }
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+  .exp-item {
+    padding: 2.5rem 0 2.5rem 3rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    transition: all 0.3s;
+  }
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: -4px; top: 2.8rem;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 2px solid var(--accent);
+    transition: all 0.3s;
+  }
+  .exp-item:hover::before { background: var(--accent); transform: scale(1.4); }
+  .exp-item:hover { background: rgba(74,142,240,0.02); }
+  .exp-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .exp-role {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.8rem;
+    border-radius: 100px;
+  }
+  .exp-company {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent2);
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+  }
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .exp-bullets li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 300;
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .exp-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.65rem;
+    top: 0.2rem;
+  }
+  .exp-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    background: rgba(74,142,240,0.1);
+    border: 1px solid rgba(74,142,240,0.25);
+    border-radius: 4px;
+    padding: 0.2rem 0.6rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent2);
+    letter-spacing: 0.08em;
+    margin-right: 0.4rem;
+  }
+
+  /* SKILLS */
+  #skills {
+    padding: 8rem 4rem;
+    border-top: 1px solid var(--border);
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .skill-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.8rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .skill-block:hover { border-color: rgba(74,142,240,0.3); transform: translateY(-4px); }
+  .skill-block:hover::before { opacity: 1; }
+  .skill-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .skill-cat {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+  }
+  .skill-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .skill-pill {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.2rem 0.55rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* PROJECTS */
+  #projects {
+    padding: 8rem 4rem;
+    border-top: 1px solid var(--border);
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(74,142,240,0.08), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .project-card:hover { transform: translateY(-6px); border-color: rgba(74,142,240,0.3); }
+  .project-card:hover::after { opacity: 1; }
+  .project-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+  }
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+  }
+  .project-impact {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+  .project-impact::before {
+    content: '◆';
+    font-size: 0.5rem;
+  }
+
+  /* CONTACT */
+  #contact {
+    padding: 8rem 4rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .contact-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+  .contact-title .hollow {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--accent2);
+  }
+  .contact-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 480px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+  }
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    transition: all 0.25s;
+    cursor: none;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent2); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* Ambient glow */
+  .glow {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .glow-1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(26,58,110,0.4), transparent 70%);
+    top: -200px; right: -200px;
+    animation: glow1 12s ease-in-out infinite alternate;
+  }
+  .glow-2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(74,142,240,0.15), transparent 70%);
+    bottom: 20%; left: -100px;
+    animation: glow2 15s ease-in-out infinite alternate;
+  }
+  @keyframes glow1 { from { transform: translate(0,0); } to { transform: translate(-80px, 60px); } }
+  @keyframes glow2 { from { transform: translate(0,0); } to { transform: translate(60px, -40px); } }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Page load animation */
+  .hero-left > * {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.7s ease forwards;
+  }
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.4s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.55s; }
+  .hero-left > *:nth-child(5) { animation-delay: 0.7s; }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-right {
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.5s forwards;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+    .hero-right { display: none; }
+    #about { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 2rem; }
+    #experience, #skills, #projects, #contact { padding: 4rem 1.5rem; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">S<span>.</span>Shaikh</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Principal Lead Consultant · Pune, India</div>
+    <h1 class="hero-name">
+      Sohel H.<br>
+      <span class="line2">Shaikh</span>
+    </h1>
+    <div class="hero-title">Python Architect · AWS · GenAI · DevOps</div>
+    <p class="hero-desc">
+      Engineering leader with 8 years building cloud-native platforms, leading high-impact teams, and pioneering AI-first automation at scale. Currently driving the CGM Onboarding Platform for Macquarie at Genpact.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Get in touch</a>
+      <a href="#experience" class="btn-secondary">View work ↓</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-card">
+      <div class="stat-num">8+</div>
+      <div class="stat-label">Years of Experience</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">70%</div>
+      <div class="stat-label">Onboarding Time Reduced</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Engineers Led</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">91%</div>
+      <div class="stat-label">Manual Effort Reduced at Citco</div>
+    </div>
+    <div class="stat-card wide">
+      <div class="stat-num" style="font-size:1.6rem; color: var(--gold);">Claude Code · MCP · AWS Lambda · Python</div>
+      <div class="stat-label">Current tech stack powering Macquarie onboarding</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left reveal">
+    <div class="section-label">About</div>
+    <h2 class="section-title">Architect.<br>Leader.<br>Builder.</h2>
+  </div>
+  <div class="about-right reveal">
+    <p class="about-text">
+      I'm a Principal Lead Consultant at Genpact, embedded with Macquarie's engineering team in Pune. My work sits at the intersection of cloud architecture, Python automation, and AI-first engineering — designing systems that replace manual workflows at scale.
+    </p>
+    <p class="about-text">
+      I make architectural decisions: whether to go fully serverless on AWS, leverage standalone EC2 infrastructure, or integrate agentic AI models. I lead my team's full delivery lifecycle — from design and code review through CI/CD onboarding and production deployment.
+    </p>
+    <p class="about-text">
+      I'm also an early adopter of Claude Code + MCP tooling, pioneering its use for automated schema mapping from Confluence — a capability now core to my team's workflow and a genuine differentiator in enterprise AI adoption.
+    </p>
+    <div class="contact-chips">
+      <span class="chip accent">📍 Pune, India</span>
+      <span class="chip">📧 shaikhsohel2294@gmail.com</span>
+      <span class="chip">📱 +91-9823545613</span>
+      <span class="chip">BE — Information Technology</span>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="exp-header reveal">
+    <div>
+      <div class="section-label">Experience</div>
+      <h2 class="section-title">Where I've<br>worked</h2>
+    </div>
+  </div>
+  <div class="timeline">
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-role">Principal Lead Consultant</div>
+        <div class="exp-period">Jan 2025 — Present</div>
+      </div>
+      <div class="exp-company">Genpact · Client: Macquarie</div>
+      <ul class="exp-bullets">
+        <li>Lead a 4-engineer team building Macquarie's CGM onboarding platform — ingesting & schema-resolving large-scale JSON data feeds from multiple upstream sources</li>
+        <li>Architect and own all infrastructure decisions: serverless (Lambda), event-driven (SQS/SNS), EC2-based, or agentic AI — evaluating trade-offs for each use case</li>
+        <li>Pioneered Claude Code + MCP integration to automate schema mapping from Confluence, eliminating a previously manual, error-prone process</li>
+        <li>Own CI/CD onboarding of all automation scripts into the team's DevOps pipeline; review all automation solutions before production deployment</li>
+        <li>Drive client stakeholder management for Macquarie, translating business requirements into scalable technical solutions</li>
+      </ul>
+      <div>
+        <span class="exp-tag">AWS Lambda</span>
+        <span class="exp-tag">SQS / SNS</span>
+        <span class="exp-tag">Claude Code</span>
+        <span class="exp-tag">MCP</span>
+        <span class="exp-tag">Python</span>
+        <span class="exp-tag">CI/CD</span>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-role">Python Developer & DevOps Engineer</div>
+        <div class="exp-period">Jul 2021 — Dec 2024</div>
+      </div>
+      <div class="exp-company">Citco LLP</div>
+      <ul class="exp-bullets">
+        <li>Built a PE NAV Checklist automation system, reducing manual effort from 3.5 hrs/day across 400+ people to 17.5 minutes — a 91.67% reduction (saving ~1,364 hrs/day)</li>
+        <li>Developed an AI-driven trade audit system using OpenAI API, achieving 80–85% accuracy and reducing validation effort by 97.92% (~441 hrs/day saved)</li>
+        <li>Designed automated invoice validation for QIC using GenAI models; containerized with Docker, managed CI/CD via Jenkins</li>
+        <li>Built full CI/CD pipelines across AWS CodePipeline, CodeBuild, CodeDeploy, and Jenkins for DEV → UAT → PROD deployments</li>
+      </ul>
+      <div>
+        <span class="exp-tag">Python</span>
+        <span class="exp-tag">AWS EC2 / RDS / S3</span>
+        <span class="exp-tag">OpenAI API</span>
+        <span class="exp-tag">Docker</span>
+        <span class="exp-tag">Jenkins</span>
+        <span class="exp-tag">CloudFormation</span>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-role">Software Engineer</div>
+        <div class="exp-period">Sep 2018 — Jul 2021</div>
+      </div>
+      <div class="exp-company">Kantar GDC</div>
+      <ul class="exp-bullets">
+        <li>Built Python automation solutions for data processing and reporting workflows across enterprise clients including GM (2 years) and Unilever (1.5 years)</li>
+        <li>Gained foundational expertise in CI/CD pipelines, AWS infrastructure, and DevOps across large-scale, regulated environments</li>
+      </ul>
+      <div>
+        <span class="exp-tag">Python</span>
+        <span class="exp-tag">AWS</span>
+        <span class="exp-tag">DevOps</span>
+        <span class="exp-tag">GM Client</span>
+        <span class="exp-tag">Unilever Client</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <div class="section-label">Skills</div>
+    <h2 class="section-title">What I work with</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-block reveal">
+      <div class="skill-icon">🐍</div>
+      <div class="skill-cat">Python & Backend</div>
+      <div class="skill-items">
+        <span class="skill-pill">Python (Advanced OOP)</span>
+        <span class="skill-pill">Pandas</span>
+        <span class="skill-pill">Boto3</span>
+        <span class="skill-pill">FastAPI</span>
+        <span class="skill-pill">REST APIs</span>
+        <span class="skill-pill">Microservices</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <div class="skill-icon">☁️</div>
+      <div class="skill-cat">AWS Cloud</div>
+      <div class="skill-items">
+        <span class="skill-pill">Lambda</span>
+        <span class="skill-pill">SQS</span>
+        <span class="skill-pill">SNS</span>
+        <span class="skill-pill">S3</span>
+        <span class="skill-pill">EC2</span>
+        <span class="skill-pill">RDS</span>
+        <span class="skill-pill">IAM</span>
+        <span class="skill-pill">CloudFormation</span>
+        <span class="skill-pill">CodePipeline</span>
+        <span class="skill-pill">CloudWatch</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <div class="skill-icon">🤖</div>
+      <div class="skill-cat">GenAI & Agentic</div>
+      <div class="skill-items">
+        <span class="skill-pill">Claude Code</span>
+        <span class="skill-pill">MCP Tools</span>
+        <span class="skill-pill">OpenAI API</span>
+        <span class="skill-pill">Hugging Face</span>
+        <span class="skill-pill">Prompt Engineering</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <div class="skill-icon">⚙️</div>
+      <div class="skill-cat">DevOps & CI/CD</div>
+      <div class="skill-items">
+        <span class="skill-pill">Jenkins</span>
+        <span class="skill-pill">Docker</span>
+        <span class="skill-pill">Kubernetes</span>
+        <span class="skill-pill">Ansible</span>
+        <span class="skill-pill">Terraform</span>
+        <span class="skill-pill">GitLab CI</span>
+        <span class="skill-pill">Shell Scripting</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <div class="skill-icon">🗄️</div>
+      <div class="skill-cat">Databases & Storage</div>
+      <div class="skill-items">
+        <span class="skill-pill">PostgreSQL (RDS)</span>
+        <span class="skill-pill">DynamoDB</span>
+        <span class="skill-pill">Amazon S3</span>
+        <span class="skill-pill">EFS / EBS</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <div class="skill-icon">🏗️</div>
+      <div class="skill-cat">Architecture & Design</div>
+      <div class="skill-items">
+        <span class="skill-pill">OOP / OOAD</span>
+        <span class="skill-pill">SOLID Principles</span>
+        <span class="skill-pill">Event-driven</span>
+        <span class="skill-pill">Serverless</span>
+        <span class="skill-pill">Agile / Scrum</span>
+        <span class="skill-pill">Team Leadership</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <div class="section-label">Projects</div>
+    <h2 class="section-title">High-impact work</h2>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-num">01 · Genpact / Macquarie · 2025</div>
+      <div class="project-name">CGM Onboarding Platform</div>
+      <p class="project-desc">Event-driven AWS platform ingesting large-scale JSON data, resolving schemas dynamically, and automating end-to-end client onboarding via Lambda, SQS, SNS, and S3. Integrated Claude Code + MCP for Confluence-based schema mapping automation.</p>
+      <div>
+        <span class="exp-tag">Lambda</span><span class="exp-tag">SQS/SNS</span><span class="exp-tag">Claude Code</span><span class="exp-tag">MCP</span>
+      </div>
+      <div class="project-impact">70%+ reduction in onboarding time · Near-zero manual errors</div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">02 · Citco LLP · 2021–2024</div>
+      <div class="project-name">PE NAV Checklist eBinder</div>
+      <p class="project-desc">Automated private equity fund accounting checklists for 400+ people. Python backend on EC2 with SQS/SNS messaging, RDS PostgreSQL, ELB, and full CI/CD via CodePipeline and Jenkins.</p>
+      <div>
+        <span class="exp-tag">Python</span><span class="exp-tag">EC2</span><span class="exp-tag">RDS</span><span class="exp-tag">Jenkins</span>
+      </div>
+      <div class="project-impact">91.67% effort reduction · ~1,364 hrs/day saved across 400+ users</div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">03 · Citco LLP · 2021–2024</div>
+      <div class="project-name">ZZAudit — AI Trade Validation</div>
+      <p class="project-desc">AI-driven audit system using OpenAI API to detect anomalous trade patterns in real time. Deployed on Lambda with AMPS pub/sub, CloudFormation IaC. Prevented significant financial penalties by catching bad trades before settlement.</p>
+      <div>
+        <span class="exp-tag">OpenAI API</span><span class="exp-tag">Lambda</span><span class="exp-tag">CloudFormation</span>
+      </div>
+      <div class="project-impact">97.92% effort reduction · ~441 hrs/day saved · Penalty prevention</div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">04 · Citco LLP · 2021–2024</div>
+      <div class="project-name">QIC Invoice Validation App</div>
+      <p class="project-desc">Automated invoice validation using GenAI models to detect errors and enforce compliance rules. Containerized with Docker; CI/CD managed via Jenkins. Delivered measurable accuracy improvements for the Data Operations team.</p>
+      <div>
+        <span class="exp-tag">Python</span><span class="exp-tag">GenAI</span><span class="exp-tag">Docker</span><span class="exp-tag">Jenkins</span>
+      </div>
+      <div class="project-impact">Automated compliance validation · Significant error reduction</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-label" style="justify-content: center;">Contact</div>
+    <h2 class="contact-title">Let's build<br><span class="hollow">something great</span></h2>
+    <p class="contact-sub">Open to senior engineering and lead architect opportunities. Based in Pune, available for on-site and hybrid roles.</p>
+    <div class="contact-links">
+      <a href="mailto:shaikhsohel2294@gmail.com" class="contact-link">
+        ✉️ &nbsp;shaikhsohel2294@gmail.com
+      </a>
+      <a href="tel:+919823545613" class="contact-link">
+        📱 &nbsp;+91-9823545613
+      </a>
+      <a href="#" class="contact-link">
+        📍 &nbsp;Pune, Maharashtra
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Sohel H. Shaikh · Principal Lead Consultant</p>
+  <p>Pune, India · Built with intentionality</p>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 5 + 'px';
+    cursor.style.top = my - 5 + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx - 18) * 0.12;
+    ry += (my - ry - 18) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2.5)'; ring.style.transform = 'scale(1.5)'; ring.style.opacity = '0.8'; });
+    el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; ring.style.transform = 'scale(1)'; ring.style.opacity = '0.5'; });
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
